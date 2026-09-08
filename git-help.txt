@@ -1,0 +1,906 @@
+Git & GitHub Setup Guide 
+Azure Data Engineering — Windows + Linux
+
+User: Ajit Ujagare
+GitHub Username: ajit-ujagare-lab
+GitHub Email: hello@ajitujagare.com
+Repository: azure-data-engineering
+Date 08/30/26 2:41pm
+1. What We Wanted to Achieve
+
+The goal was to work on the same Azure Data Engineering code from multiple computers.
+
+Our setup is:
+
+                    GitHub ☁️
+                        |
+              azure-data-engineering
+                   /          \
+                  /            \
+          🐧 Linux             🪟 Windows
+             |                    |
+          Git + SSH            Git + SSH
+
+
+GitHub is the central online repository.
+
+Linux and Windows each have their own local copy of the project.
+
+2. Git vs GitHub
+Git
+
+Git is software installed on your computer.
+
+It tracks changes to your files and keeps a history of your work.
+
+GitHub
+
+GitHub is an online service where your Git repository is stored.
+
+Think of it as:
+
+Git     = Version control tool on your computer
+GitHub  = Online home for your Git repository
+VS Code = Where you write your code
+
+3. GitHub Account
+
+We created a GitHub account using:
+
+Email:
+hello@ajitujagare.com
+
+GitHub username:
+ajit-ujagare-lab
+
+
+The GitHub repository we created is:
+
+azure-data-engineering
+
+4. Linux Git Setup
+Check Git installation
+
+On Linux:
+
+git --version
+
+
+Our Linux machine already had Git installed:
+
+git version 2.43.0
+
+Configure Git identity
+git config --global user.name "Ajit Ujagare"
+
+git config --global user.email "hello@ajitujagare.com"
+
+
+Check:
+
+git config --global --list
+
+
+Expected:
+
+user.name=Ajit Ujagare
+user.email=hello@ajitujagare.com
+
+5. Linux SSH Setup
+
+We checked the SSH directory:
+
+ls -la ~/.ssh
+
+
+Then created an SSH key:
+
+ssh-keygen -t ed25519 -C "hello@ajitujagare.com"
+
+
+The key was saved as:
+
+~/.ssh/id_ed25519
+~/.ssh/id_ed25519.pub
+
+
+Important:
+
+id_ed25519
+    = PRIVATE KEY
+    = NEVER SHARE
+
+id_ed25519.pub
+    = PUBLIC KEY
+    = Can be added to GitHub
+
+
+We added the Linux public key to GitHub.
+
+Then tested the connection:
+
+ssh -T git@github.com
+
+
+Successful result:
+
+Hi ajit-ujagare-lab! You've successfully authenticated,
+but GitHub does not provide shell access.
+
+
+This confirmed:
+
+Linux → SSH → GitHub ✅
+
+6. Create the GitHub Repository
+
+We created:
+
+azure-data-engineering
+
+
+Repository owner:
+
+ajit-ujagare-lab
+
+
+The repository initially contained no commits.
+
+7. Clone the Repository on Linux
+
+We created a projects directory:
+
+mkdir -p ~/projects
+
+
+Then:
+
+cd ~/projects
+
+
+We cloned the GitHub repository:
+
+git clone git@github.com:ajit-ujagare-lab/azure-data-engineering.git
+
+
+This created:
+
+~/projects/azure-data-engineering
+
+8. What Does git clone Mean?
+
+git clone means:
+
+Copy an existing GitHub repository onto a computer for the first time.
+
+Example:
+
+git clone git@github.com:ajit-ujagare-lab/azure-data-engineering.git
+
+
+Use git clone when setting up the project on a new computer.
+
+Do NOT repeatedly clone the same project.
+
+Once the project already exists on the computer, use:
+
+git pull
+
+9. First Commit
+
+We created a README file and checked Git:
+
+git status
+
+
+Git initially showed:
+
+Untracked files:
+    README.md
+
+
+We staged it:
+
+git add .
+
+
+Then created a commit:
+
+git commit -m "Add initial README"
+
+
+A commit is a saved checkpoint in Git's history.
+
+10. Push to GitHub
+
+We sent the commit to GitHub:
+
+git push -u origin main
+
+
+After this, our local repository and GitHub repository were synchronized.
+
+11. Windows Setup
+
+Git was already installed on Windows.
+
+We opened:
+
+Git Bash
+
+Configure Git
+git config --global user.name "Ajit Ujagare"
+
+git config --global user.email "hello@ajitujagare.com"
+
+
+Verify:
+
+git config --global --list
+
+12. Windows SSH Setup
+
+We created a separate SSH key for Windows:
+
+ssh-keygen -t ed25519 -C "hello@ajitujagare.com"
+
+
+When asked:
+
+Enter file in which to save the key:
+
+
+we accepted the default by pressing:
+
+Enter
+
+
+The Windows keys were created:
+
+~/.ssh/id_ed25519
+~/.ssh/id_ed25519.pub
+
+
+We added the Windows public key to the GitHub account.
+
+We then tested:
+
+ssh -T git@github.com
+
+
+Successful authentication confirmed:
+
+Windows → SSH → GitHub ✅
+
+13. Clone the Repository on Windows
+
+We created:
+
+mkdir -p ~/projects
+
+
+Then:
+
+cd ~/projects
+
+
+We cloned the existing repository:
+
+git clone git@github.com:ajit-ujagare-lab/azure-data-engineering.git
+
+
+Windows now has its own local copy:
+
+C:\Users\ajitu\projects\azure-data-engineering
+
+
+In Git Bash:
+
+~/projects/azure-data-engineering
+
+14. Final Two-Computer Setup
+
+We now have:
+
+                         ☁️ GitHub
+                            |
+                azure-data-engineering
+                       /          \
+                      /            \
+                 🐧 Linux        🪟 Windows
+                    |               |
+                  Git               Git
+                  SSH               SSH
+
+
+Both computers have the same project.
+
+15. Project Folder Structure
+
+For Azure Data Engineering learning, we created:
+
+azure-data-engineering/
+│
+├── README.md
+│
+├── python/
+│
+├── sql/
+│
+├── pyspark/
+│
+├── azure/
+│
+└── projects/
+
+
+These folders are intended for:
+
+python/
+    Python learning and scripts
+
+sql/
+    SQL practice
+
+pyspark/
+    PySpark learning
+
+azure/
+    Azure-related work
+
+projects/
+    Larger projects
+
+16. Why Did We Create .gitkeep?
+
+Git does not track empty directories.
+
+Therefore, we created:
+
+python/.gitkeep
+sql/.gitkeep
+pyspark/.gitkeep
+azure/.gitkeep
+projects/.gitkeep
+
+
+This allows Git to keep the empty folders in the repository.
+
+Once real files are added, .gitkeep files are generally no longer necessary.
+
+17. Git add
+
+Example:
+
+git add .
+
+
+Meaning:
+
+Prepare all changed files for the next commit.
+
+The . means the current directory and its contents.
+
+18. Git commit
+
+Example:
+
+git commit -m "Create project folder structure"
+
+
+Breakdown:
+
+git
+    = Use Git
+
+commit
+    = Save a checkpoint
+
+-m
+    = Provide a message
+
+"Create project folder structure"
+    = Description of the changes
+
+
+A commit is saved in your local Git history.
+
+It is NOT automatically sent to GitHub.
+
+19. Git push
+git push
+
+
+Meaning:
+
+Send your local commits to GitHub.
+
+Think:
+
+Local computer
+      |
+   git push
+      ↓
+   GitHub ☁️
+
+20. Git pull
+git pull
+
+
+Meaning:
+
+Download the latest changes from GitHub into your local repository.
+
+Think:
+
+GitHub ☁️
+    |
+ git pull
+    ↓
+Your computer
+
+21. Git status
+git status
+
+
+This tells you what is happening in your repository.
+
+It can show:
+
+Current branch
+Changes
+Untracked files
+Staged files
+Whether your branch is ahead or behind GitHub
+
+Use it frequently.
+
+22. Everyday Git Workflow
+
+This is the most important section.
+
+BEFORE WORK
+
+Go to the project:
+
+Linux
+cd ~/projects/azure-data-engineering
+
+Windows
+cd ~/projects/azure-data-engineering
+
+
+Then:
+
+git pull
+
+
+Now you have the latest version.
+
+23. Work on Your Code
+
+Use VS Code or another editor.
+
+Example:
+
+python/
+    hello.py
+    functions.py
+
+sql/
+    joins.sql
+    window_functions.sql
+
+pyspark/
+    dataframe.py
+
+24. AFTER WORK
+
+First:
+
+git status
+
+
+Then:
+
+git add .
+
+
+Then:
+
+git commit -m "Describe what you changed"
+
+
+Example:
+
+git commit -m "Add SQL joins practice"
+
+
+Finally:
+
+git push
+
+25. The Five Commands to Remember
+
+For normal daily work, remember these:
+
+git pull
+
+git status
+
+git add .
+
+git commit -m "your message"
+
+git push
+
+26. Complete Daily Workflow
+START
+  |
+  v
+cd ~/projects/azure-data-engineering
+  |
+  v
+git pull
+  |
+  v
+WORK ON YOUR CODE
+  |
+  v
+git status
+  |
+  v
+git add .
+  |
+  v
+git commit -m "What I changed"
+  |
+  v
+git push
+  |
+  v
+GitHub ☁️
+
+27. Switching Between Linux and Windows
+
+Suppose you work on Linux today.
+
+After finishing:
+
+git add .
+git commit -m "Add Python practice"
+git push
+
+
+The changes are now on GitHub.
+
+Tomorrow, on Windows:
+
+cd ~/projects/azure-data-engineering
+git pull
+
+
+Now Windows has the latest changes.
+
+The same works in reverse.
+
+28. Important Rule When Switching Computers
+
+Before starting work on another computer:
+
+git pull
+
+
+Before switching to another computer:
+
+git push
+
+
+Simple habit:
+
+Finish → Commit → Push
+Switch computer
+Pull → Continue
+
+29. What If I Get a New Computer?
+
+You do NOT need another GitHub account.
+
+You can use the same GitHub account.
+
+On the new computer:
+
+Install Git
+     ↓
+Configure Git
+     ↓
+Create SSH key
+     ↓
+Add public SSH key to GitHub
+     ↓
+git clone
+     ↓
+Start working
+
+
+For example:
+
+git clone git@github.com:ajit-ujagare-lab/azure-data-engineering.git
+
+
+One GitHub account can have multiple SSH keys:
+
+GitHub Account
+     |
+     ├── Linux SSH key
+     ├── Windows SSH key
+     └── New Computer SSH key
+
+30. git clone vs git pull
+
+This is very important.
+
+git clone
+
+Use when you DON'T have the project on the computer yet:
+
+git clone git@github.com:ajit-ujagare-lab/azure-data-engineering.git
+
+
+Meaning:
+
+Get this repository for the first time.
+
+git pull
+
+Use when the repository is ALREADY on your computer:
+
+git pull
+
+
+Meaning:
+
+Get the latest changes.
+
+Remember:
+
+New computer
+    ↓
+git clone
+
+Existing project
+    ↓
+git pull
+
+31. GitHub Website vs Git
+
+You can technically log into GitHub in a browser and upload/download files.
+
+However, for professional development:
+
+VS Code
+   ↓
+Git
+   ↓
+GitHub
+
+
+is the preferred workflow.
+
+Git provides:
+
+Version history
+Commits
+Branches
+Change tracking
+Collaboration
+Ability to undo/recover changes
+32. SSH Passphrase
+
+Our SSH keys are protected with a passphrase.
+
+When Git asks:
+
+Enter passphrase for key...
+
+
+enter the passphrase you created for that machine.
+
+This is NOT your GitHub password.
+
+SSH passphrase
+    ↓
+Protects your private SSH key
+
+GitHub password
+    ↓
+Used for GitHub website/account authentication
+
+
+We decided to keep the SSH passphrase protection rather than removing it.
+
+Later, ssh-agent can be configured to reduce repeated passphrase prompts.
+
+33. LF / CRLF Warning
+
+On Windows you may see:
+
+LF will be replaced by CRLF
+the next time Git touches it
+
+
+This is usually a line-ending warning, not an error.
+
+Linux commonly uses:
+
+LF
+
+
+Windows commonly uses:
+
+CRLF
+
+
+Because this project is used on both Linux and Windows, Git may warn about line endings.
+
+The warning does not normally mean your Python or SQL file is broken.
+
+34. Security Rules
+
+NEVER commit sensitive information to GitHub.
+
+Do NOT put these in the repository:
+
+Passwords
+API keys
+Azure client secrets
+Connection strings
+Private SSH keys
+.env files containing secrets
+Access tokens
+Certificates/private credentials
+
+
+Especially NEVER upload:
+
+~/.ssh/id_ed25519
+
+
+The private SSH key must remain private.
+
+The .pub file is the public key.
+
+35. Recommended Azure Data Engineering Repository
+
+As the learning progresses, the repository could eventually look like:
+
+azure-data-engineering/
+│
+├── README.md
+│
+├── python/
+│   ├── basics/
+│   ├── functions/
+│   ├── files/
+│   └── pandas/
+│
+├── sql/
+│   ├── basics/
+│   ├── joins/
+│   ├── aggregations/
+│   └── window-functions/
+│
+├── pyspark/
+│   ├── basics/
+│   ├── dataframes/
+│   ├── transformations/
+│   └── spark-sql/
+│
+├── azure/
+│   ├── data-factory/
+│   ├── storage/
+│   ├── synapse/
+│   └── databricks/
+│
+└── projects/
+    ├── project-01/
+    ├── project-02/
+    └── project-03/
+
+
+This can grow naturally as your skills improve.
+
+36. Quick Git Cheat Sheet
+Get latest code
+git pull
+
+See changes
+git status
+
+Stage changes
+git add .
+
+Save checkpoint
+git commit -m "Describe your changes"
+
+Send to GitHub
+git push
+
+Get a repository for the first time
+git clone REPOSITORY_URL
+
+See commit history
+git log
+
+See changes
+git diff
+
+37. The Golden Rule
+
+When working normally:
+
+BEFORE WORK
+git pull
+
+WORK
+
+AFTER WORK
+git status
+git add .
+git commit -m "What I changed"
+git push
+
+
+That's the workflow to remember.
+
+38. Final Mental Model
+                    ☁️ GitHub
+                       |
+                Central Repository
+                       |
+          +------------+------------+
+          |                         |
+          ↓                         ↓
+     🐧 Linux                  🪟 Windows
+          |                         |
+       Git + SSH                 Git + SSH
+          |                         |
+        VS Code                  VS Code
+          |                         |
+          +------ Your Code -------+
+
+Remember:
+
+VS Code → Write code
+
+Git → Track and save versions
+
+GitHub → Store/share the repository online
+
+git pull → Get latest code
+
+git add → Prepare changes
+
+git commit → Save checkpoint
+
+git push → Send changes to GitHub
+
+git clone → Get a repository for the first time
+
+39. My Everyday Commands
+cd ~/projects/azure-data-engineering
+
+git pull
+
+# Work on Python / SQL / PySpark / Azure files
+
+git status
+
+git add .
+
+git commit -m "Describe what I changed"
+
+git push
+
+
+END OF GUIDE
