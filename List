@@ -7,3 +7,73 @@ https://colab.research.google.com/drive/1f0asFKonUFTANeTejG2BZVThUS88wt0B?usp=sh
 pyspark in google collab
 
 https://colab.research.google.com/drive/1MTqQIv3uDHB50rxGVMhdKGMF9Hnq4Al8?usp=sharing
+
+
+
+-----Notes----
+
+
+list insertion order is preserve indexing position is fixed. - means
+list = [1,2,3] whenever you called list it will show as it is. 
+it contain duplicate and list is mutable - dynamic data type. dynamic mean you can edit,remove, delete, add,extend the list.
+list is collection of heterogeneous - non similar data types it can contain all other data types
+info = [{"name":"ajit","number":9766764143,"addr":"Pune"}]
+# last number is excluded 
+if i want to access 4,5 from given below list
+s[4:6] # output [4,5]
+
+slice operator syntax
+sequence[start:stop:step]
+
+s = [1,2,3,'python',4,5]
+s[:] # means start from 0th index by default step is 1
+s[::] # means start from 0th index end at -1 by default step is 1
+s[:-1] # entire list 
+s[::-1] # it will return list in reversed order
+s[0] # 1
+s[3][0::-1]'ajit'
+s[4][0:1]
+positive index 0,1,2
+Negative index -1,-2,-3 start from -1 +6
+s[-3] #'python
+s[-3][-1][1] # 'n'
+s[-3][0:6:-1]
+
+built in slice()
+
+slice
+
+
+len(s) # to count number of elements in list
+len(s) # 6 
+len.count(1) # to count the number of occurrence of element /char/int/etc. this is method
+
+s.insert(1,0) # insert method will insert the element at index position eg. 0 will be added at 1st index.
+s.append('end') # append will add element at -1 at last position append takes single element and index will be increased by 1
+extent() # extent take iterable elements,sequence objects you can apply for loop eg [1,2,3]
+s.extend('python') it will ierate the elements at add to last.
+>>> s.extend('python')
+>>> s
+[1, 2, 3, 'python', 4, 5, 'p', 'y', 't', 'h', 'o', 'n']
+# give this in comma,
+eg s.extend('12') | 
+
+remove() will remove the elements by its values 
+s.remove('python')
+
+pop() will remove the elements by index
+s.pop(5)  # 5th position value/element will be removed and will show on terminal. eg 5th is excluded so 4th position's value will be removed.
+l1 = [1, 2, 3, 'python']
+s.pop(3) # 2 will be removed
+enumerate() will show the index of the value
+>>> for i,e in enumerate(range(5)):
+...     print(i,e)
+... 
+0 0
+1 1
+2 2
+3 3
+4 4
+
+
+
